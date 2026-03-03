@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wasserstoff Motorreinigung Matthes | HHO Carbon Cleaning Berlin</title>
+  <title>Wasserstoff Motorreinigung Matthes | Dinslaken</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
@@ -299,8 +299,13 @@
       .faq-body-inner { padding: 0.2rem 1.2rem 1.5rem 2rem; }
     }
 
-    .scan-line { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--neon), transparent); opacity: 0.4; animation: scan 5s ease-in-out infinite; pointer-events: none; z-index: 9999; }
-    @keyframes scan { 0% { top: -2px; opacity: 0; } 10% { opacity: 0.4; } 90% { opacity: 0.4; } 100% { top: 100vh; opacity: 0; } }
+    .scan-line { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--neon), transparent); opacity: 0.4; animation: scan 10s ease-in-out infinite; pointer-events: none; z-index: 9999; }
+    @keyframes scan {
+      0%   { top: -2px; opacity: 0; }
+      5%   { opacity: 0.4; }
+      35%  { top: 100vh; opacity: 0; }
+      100% { top: 100vh; opacity: 0; } /* sits invisible for the rest */
+    }
   </style>
 </head>
 <body>
@@ -632,7 +637,7 @@
           <div class="contact-icon">📍</div>
           <h3>Standort</h3>
           <div class="contact-value">Dinslaken</div>
-          <div class="contact-sub">PLZ 46535 · Service-BB<br/>Gut erreichbar aus dem Großraum Berlin und Umgebung.</div>
+          <div class="contact-sub">PLZ 46535 · Service-BB<br/>Gut erreichbar aus dem Dinslaken und Umgebung.</div>
         </div>
         <div class="contact-card">
           <div class="contact-icon">🕐</div>
