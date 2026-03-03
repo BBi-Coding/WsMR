@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wasserstoff Motorreinigung Matthes | HHO Carbon Cleaning Berlin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+  <style>
+    :root {
+      --neon: #00e040;
+      --neon-dim: #00b832;
+      --neon-glow: rgba(0, 224, 64, 0.35);
+      --neon-glow-strong: rgba(0, 224, 64, 0.6);
+      --dark: #060a0f;
+      --dark2: #0d1420;
+      --dark3: #111a28;
+      --dark4: #1a2535;
+      --mid: #1e2d42;
+      --text: #d0dce8;
+      --text-dim: #7a8fa8;
+      --border: rgba(0,224,64,0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark2); }
+    ::-webkit-scrollbar-thumb { background: var(--neon-dim); border-radius: 3px; }
+
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(6, 10, 15, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    .navbar.scrolled { box-shadow: 0 4px 32px rgba(0,224,64,0.08); }
+    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .nav-logo img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--neon); box-shadow: 0 0 12px var(--neon-glow); }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text span:first-child { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--neon); letter-spacing: 0.08em; }
+    .nav-logo-text span:last-child { font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--neon); transform: scaleX(0); transition: transform 0.2s; }
+    .nav-links a:hover { color: var(--neon); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta { background: var(--neon); color: var(--dark) !important; padding: 8px 20px; border-radius: 4px; font-weight: 700 !important; letter-spacing: 0.05em !important; transition: box-shadow 0.2s, transform 0.2s !important; }
+    .nav-cta:hover { box-shadow: 0 0 20px var(--neon-glow-strong) !important; transform: translateY(-1px); color: var(--dark) !important; }
+    .nav-cta::after { display: none !important; }
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .burger span { display: block; width: 26px; height: 2px; background: var(--text); transition: all 0.3s; border-radius: 1px; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--neon); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--neon); }
+    .mobile-menu { position: fixed; top: 70px; left: 0; right: 0; background: rgba(6, 10, 15, 0.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 999; transform: translateY(-110%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+    .mobile-menu.open { transform: translateY(0); }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .mobile-menu ul a { display: block; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .mobile-menu ul a:hover { color: var(--neon); }
+    .mobile-menu-cta { margin-top: 1.2rem; display: block; background: var(--neon); color: var(--dark); text-align: center; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-decoration: none; text-transform: uppercase; box-shadow: 0 0 20px var(--neon-glow); }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 70px; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 60% 50%, rgba(0,224,64,0.06) 0%, transparent 65%), radial-gradient(ellipse 50% 80% at 10% 80%, rgba(0,180,50,0.04) 0%, transparent 60%), linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,224,64,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,224,64,0.04) 1px, transparent 1px); background-size: 50px 50px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%); }
+    .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .particle { position: absolute; width: 3px; height: 3px; background: var(--neon); border-radius: 50%; opacity: 0; animation: float-particle linear infinite; }
+    @keyframes float-particle { 0% { transform: translateY(100vh) translateX(0); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { transform: translateY(-50px) translateX(30px); opacity: 0; } }
+    .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,224,64,0.1); border: 1px solid rgba(0,224,64,0.3); border-radius: 20px; padding: 6px 14px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--neon); margin-bottom: 1.5rem; }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--neon); border-radius: 50%; animation: blink 1.5s ease-in-out infinite; box-shadow: 0 0 6px var(--neon); }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+    .hero h1 { font-family: 'Rajdhani', sans-serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero h1 span { color: var(--neon); text-shadow: 0 0 30px rgba(0,224,64,0.5); }
+    .hero-sub { font-size: 1.05rem; line-height: 1.7; color: var(--text-dim); margin-bottom: 2.5rem; max-width: 480px; }
+    .hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--neon); color: var(--dark); text-decoration: none; padding: 16px 32px; border-radius: 6px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.08em; text-transform: uppercase; position: relative; overflow: hidden; animation: pulse-cta 2.5s ease-in-out infinite; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); animation: none; box-shadow: 0 8px 32px var(--neon-glow-strong); }
+    @keyframes pulse-cta { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,224,64,0.6), 0 4px 20px rgba(0,224,64,0.3); } 50% { box-shadow: 0 0 0 12px rgba(0,224,64,0), 0 4px 20px rgba(0,224,64,0.4); } }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--text); text-decoration: none; padding: 16px 28px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; transition: border-color 0.2s, color 0.2s, background 0.2s; }
+    .btn-secondary:hover { border-color: var(--neon); color: var(--neon); background: rgba(0,224,64,0.05); }
+    .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+    .hero-logo-wrap { position: relative; display: flex; justify-content: center; align-items: center; }
+    .hero-logo-wrap::before { content: ''; position: absolute; width: 340px; height: 340px; border-radius: 50%; border: 1px solid rgba(0,224,64,0.2); animation: orbit-ring 8s linear infinite; }
+    .hero-logo-wrap::after { content: ''; position: absolute; width: 410px; height: 410px; border-radius: 50%; border: 1px dashed rgba(0,224,64,0.1); animation: orbit-ring 12s linear infinite reverse; }
+    @keyframes orbit-ring { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .hero-logo { width: 280px; height: 280px; border-radius: 50%; border: 3px solid rgba(0,224,64,0.4); box-shadow: 0 0 40px rgba(0,224,64,0.2), 0 0 80px rgba(0,224,64,0.1), inset 0 0 40px rgba(0,0,0,0.5); animation: logo-float 4s ease-in-out infinite; position: relative; z-index: 2; }
+    @keyframes logo-float { 0%, 100% { transform: translateY(0px); filter: drop-shadow(0 0 20px rgba(0,224,64,0.3)); } 50% { transform: translateY(-12px); filter: drop-shadow(0 8px 30px rgba(0,224,64,0.5)); } }
+    .hho-badge { position: absolute; top: -10px; right: -20px; background: linear-gradient(135deg, var(--neon) 0%, #00b832 100%); color: var(--dark); border-radius: 50%; width: 90px; height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Rajdhani', sans-serif; font-weight: 700; z-index: 5; box-shadow: 0 0 24px rgba(0,224,64,0.6); animation: badge-pulse 2s ease-in-out infinite; }
+    .hho-badge-num { font-size: 1.4rem; line-height: 1; }
+    .hho-badge-sub { font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
+    @keyframes badge-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+
+    .stats-bar { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 0; }
+    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stat-item { padding: 2rem; display: flex; align-items: center; gap: 1.2rem; border-right: 1px solid var(--border); transition: background 0.3s; }
+    .stat-item:last-child { border-right: none; }
+    .stat-item:hover { background: rgba(0,224,64,0.03); }
+    .stat-icon { width: 52px; height: 52px; background: rgba(0,224,64,0.1); border: 1px solid rgba(0,224,64,0.25); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .stat-text { display: flex; flex-direction: column; gap: 2px; }
+    .stat-num { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--neon); line-height: 1; letter-spacing: 0.02em; }
+    .stat-label { font-size: 0.8rem; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .section { padding: 6rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--neon); margin-bottom: 1rem; }
+    .section-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--neon); }
+    .section-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.1; letter-spacing: 0.03em; text-transform: uppercase; margin-bottom: 1rem; }
+    .section-title span { color: var(--neon); }
+    .section-lead { font-size: 1rem; color: var(--text-dim); line-height: 1.7; max-width: 560px; }
+    .divider { width: 48px; height: 3px; background: var(--neon); margin: 1.5rem 0; border-radius: 2px; box-shadow: 0 0 12px var(--neon-glow); }
+
+    .info-section { background: var(--dark); }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .info-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .info-card { background: var(--dark3); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; display: flex; align-items: flex-start; gap: 1.2rem; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; }
+    .info-card:hover { border-color: rgba(0,224,64,0.35); box-shadow: 0 4px 24px rgba(0,224,64,0.08); transform: translateX(4px); }
+    .info-card-icon { font-size: 1.6rem; flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,224,64,0.08); border-radius: 8px; }
+    .info-card-body h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .info-card-body p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.6; }
+    .process-steps { display: flex; flex-direction: column; gap: 0; }
+    .process-step { display: flex; gap: 1.5rem; position: relative; }
+    .process-step:not(:last-child)::before { content: ''; position: absolute; left: 19px; top: 44px; width: 2px; height: calc(100% - 10px); background: linear-gradient(to bottom, var(--neon-dim), transparent); }
+    .step-num { width: 40px; height: 40px; border-radius: 50%; background: rgba(0,224,64,0.1); border: 2px solid var(--neon-dim); display: flex; align-items: center; justify-content: center; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; color: var(--neon); flex-shrink: 0; z-index: 1; }
+    .step-body { padding: 0.5rem 0 2rem; }
+    .step-body h4 { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; color: #fff; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .step-body p { font-size: 0.87rem; color: var(--text-dim); line-height: 1.6; }
+
+    .pricing-section { background: var(--dark2); }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+    .pricing-card { background: var(--dark3); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem; position: relative; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; display: flex; flex-direction: column; }
+    .pricing-card:hover { transform: translateY(-6px); box-shadow: 0 12px 48px rgba(0,0,0,0.3); }
+    .pricing-card.featured { border-color: rgba(0,224,64,0.45); box-shadow: 0 0 40px rgba(0,224,64,0.1), inset 0 0 0 1px rgba(0,224,64,0.1); background: linear-gradient(160deg, #0f1e2e 0%, var(--dark3) 100%); }
+    .pricing-card.featured:hover { box-shadow: 0 12px 60px rgba(0,224,64,0.2); }
+    .recommended-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--neon); color: var(--dark); font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 18px; border-radius: 20px; white-space: nowrap; box-shadow: 0 0 16px var(--neon-glow); }
+    .pricing-header { margin-bottom: 2rem; }
+    .pricing-name { font-family: 'Rajdhani', sans-serif; font-size: 1.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; margin-bottom: 0.6rem; }
+    .pricing-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 0.4rem; }
+    .price-amount { font-family: 'Rajdhani', sans-serif; font-size: 3rem; font-weight: 700; color: var(--neon); line-height: 1; }
+    .price-currency { font-size: 1.4rem; color: var(--neon); font-weight: 600; }
+    .price-duration { font-size: 0.82rem; color: var(--text-dim); letter-spacing: 0.06em; }
+    .pricing-desc { font-size: 0.85rem; color: var(--text-dim); background: rgba(255,255,255,0.04); border-radius: 6px; padding: 8px 12px; border-left: 2px solid var(--neon-dim); }
+    .pricing-features { list-style: none; flex: 1; margin: 1.5rem 0; display: flex; flex-direction: column; gap: 0.8rem; }
+    .pricing-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: var(--text); line-height: 1.4; }
+    .feature-check { width: 18px; height: 18px; border-radius: 50%; background: rgba(0,224,64,0.15); border: 1px solid rgba(0,224,64,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 0.65rem; color: var(--neon); }
+    .pricing-cta { display: block; text-align: center; padding: 14px; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; }
+    .pricing-cta.primary { background: var(--neon); color: var(--dark); box-shadow: 0 4px 20px rgba(0,224,64,0.3); }
+    .pricing-cta.primary:hover { box-shadow: 0 8px 32px rgba(0,224,64,0.5); transform: translateY(-2px); }
+    .pricing-cta.secondary { background: rgba(0,224,64,0.08); color: var(--neon); border: 1px solid rgba(0,224,64,0.3); }
+    .pricing-cta.secondary:hover { background: rgba(0,224,64,0.15); border-color: rgba(0,224,64,0.5); transform: translateY(-2px); }
+
+    /* FAQ */
+    .faq-section { background: var(--dark2); }
+    .faq-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; max-width: 900px; }
+    .faq-item { background: var(--dark3); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s; }
+    .faq-item.open { border-color: rgba(0,224,64,0.4); box-shadow: 0 4px 24px rgba(0,224,64,0.08); }
+    .faq-trigger { width: 100%; background: none; border: none; cursor: pointer; padding: 1.6rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; text-align: left; }
+    .faq-trigger:hover .faq-trigger-text { color: var(--neon); }
+    .faq-trigger-text { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; letter-spacing: 0.04em; line-height: 1.3; padding-left: 1rem; border-left: 3px solid var(--neon); transition: color 0.2s; }
+    .faq-item.open .faq-trigger-text { color: var(--neon); }
+    .faq-chevron { width: 40px; height: 40px; border-radius: 50%; background: rgba(0,224,64,0.1); border: 1px solid rgba(0,224,64,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.3s, transform 0.35s; color: var(--neon); font-size: 1.2rem; }
+    .faq-item.open .faq-chevron { background: rgba(0,224,64,0.2); transform: rotate(180deg); }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+    .faq-body-inner { padding: 0.2rem 2rem 2rem 3.5rem; font-size: 1.15rem; color: var(--text-dim); line-height: 1.8; }
+
+    .contact-section { background: var(--dark); }
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+    .contact-card { background: var(--dark3); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; display: flex; flex-direction: column; align-items: flex-start; }
+    .contact-card:hover { border-color: rgba(0,224,64,0.3); box-shadow: 0 8px 32px rgba(0,224,64,0.07); transform: translateY(-4px); }
+    .contact-icon { width: 52px; height: 52px; background: rgba(0,224,64,0.1); border: 1px solid rgba(0,224,64,0.25); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.2rem; }
+    .contact-card h3 { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.8rem; }
+    .contact-value { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; font-family: 'Rajdhani', sans-serif; letter-spacing: 0.04em; }
+    .contact-value a { color: var(--neon); text-decoration: none; transition: text-shadow 0.2s; }
+    .contact-value a:hover { text-shadow: 0 0 20px var(--neon-glow); }
+    .contact-sub { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+    .hours-list { display: flex; flex-direction: column; gap: 4px; margin-top: 0.5rem; }
+    .hour-row { display: flex; justify-content: space-between; font-size: 0.85rem; gap: 1rem; }
+    .hour-day { color: var(--text-dim); }
+    .hour-time { color: var(--text); font-weight: 500; }
+
+    /* FOOTER */
+    .footer { background: var(--dark2); border-top: 1px solid var(--border); padding: 1.8rem 2rem 1.4rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .footer-logo img { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); }
+    .footer-logo span { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--text-dim); letter-spacing: 0.06em; }
+    .footer-text { font-size: 0.8rem; color: var(--text-dim); }
+    .footer-text span { color: var(--neon); }
+    .footer-legal {
+      max-width: 1200px; margin: 0 auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+      font-size: 0.82rem;
+    }
+    .footer-legal a, .footer-legal button {
+      color: var(--text-dim);
+      text-decoration: none;
+      background: none; border: none; cursor: pointer;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.82rem;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover, .footer-legal button:hover { color: var(--neon); }
+    .footer-legal-sep { color: var(--border); }
+
+    /* COOKIE BANNER */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 9000;
+      background: rgba(13, 20, 32, 0.98);
+      border-top: 1px solid rgba(0,224,64,0.25);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
+      padding: 1.5rem 2rem;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cookie-banner.visible { transform: translateY(0); }
+    .cookie-banner-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .cookie-banner-icon { font-size: 2rem; flex-shrink: 0; }
+    .cookie-banner-text { flex: 1; min-width: 200px; }
+    .cookie-banner-text strong { display: block; font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; margin-bottom: 0.3rem; }
+    .cookie-banner-text p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+    .cookie-banner-text a { color: var(--neon); text-decoration: none; }
+    .cookie-banner-text a:hover { text-decoration: underline; }
+    .cookie-banner-actions { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; flex-shrink: 0; }
+    .cookie-btn-accept {
+      background: var(--neon); color: var(--dark);
+      border: none; cursor: pointer;
+      font-family: 'Rajdhani', sans-serif; font-weight: 700;
+      font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 10px 22px; border-radius: 6px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .cookie-btn-accept:hover { box-shadow: 0 4px 20px var(--neon-glow-strong); transform: translateY(-1px); }
+    .cookie-btn-necessary {
+      background: rgba(0,224,64,0.08); color: var(--neon);
+      border: 1px solid rgba(0,224,64,0.3); cursor: pointer;
+      font-family: 'Rajdhani', sans-serif; font-weight: 600;
+      font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 10px 20px; border-radius: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .cookie-btn-necessary:hover { background: rgba(0,224,64,0.14); border-color: rgba(0,224,64,0.5); }
+    .cookie-btn-more {
+      color: var(--text-dim); font-size: 0.82rem; text-decoration: none;
+      padding: 10px 8px; transition: color 0.2s;
+    }
+    .cookie-btn-more:hover { color: var(--neon); }
+
+    .float-cta { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 900; display: none; }
+    .float-cta a { display: flex; align-items: center; gap: 10px; background: var(--neon); color: var(--dark); text-decoration: none; padding: 14px 20px; border-radius: 50px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 24px rgba(0,224,64,0.5); animation: pulse-cta 2s ease-in-out infinite; }
+    .float-cta a:hover { animation: none; box-shadow: 0 6px 32px rgba(0,224,64,0.7); transform: scale(1.04); }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .burger { display: flex; }
+      .hero-content { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+      .hero-sub { margin: 0 auto 2.5rem; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { order: -1; }
+      .hero-logo { width: 220px; height: 220px; }
+      .hero-logo-wrap::before { width: 270px; height: 270px; }
+      .hero-logo-wrap::after { width: 330px; height: 330px; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .info-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .float-cta { display: block; }
+      .faq-trigger-text { font-size: 1.25rem; }
+      .faq-body-inner { font-size: 1.05rem; }
+      .cookie-banner-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .section { padding: 4rem 1.2rem; }
+      .hero-content { padding: 3rem 1.2rem; }
+      .faq-trigger { padding: 1.2rem 1.2rem; }
+      .faq-body-inner { padding: 0.2rem 1.2rem 1.5rem 2rem; }
+    }
+
+    .scan-line { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--neon), transparent); opacity: 0.4; animation: scan 5s ease-in-out infinite; pointer-events: none; z-index: 9999; }
+    @keyframes scan { 0% { top: -2px; opacity: 0; } 10% { opacity: 0.4; } 90% { opacity: 0.4; } 100% { top: 100vh; opacity: 0; } }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="scan-line"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" :class="{ scrolled: scrolled }">
+    <a class="nav-logo" href="#">
+      <img src="img/logo.png" alt="Logo" />
+      <div class="nav-logo-text">
+        <span>Wasserstoff</span>
+        <span>Motorreinigung Matthes</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#technologie">Technologie</a></li>
+      <li><a href="#preise">Preise</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a class="nav-cta" href="tel:+492083700000">☎ Jetzt Buchen</a></li>
+    </ul>
+    <button class="burger" :class="{ open: menuOpen }" @click="menuOpen = !menuOpen">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" :class="{ open: menuOpen }">
+    <ul>
+      <li><a href="#leistungen" @click="menuOpen = false">Leistungen</a></li>
+      <li><a href="#technologie" @click="menuOpen = false">Technologie</a></li>
+      <li><a href="#preise" @click="menuOpen = false">Preise</a></li>
+      <li><a href="#faq" @click="menuOpen = false">FAQ</a></li>
+      <li><a href="#kontakt" @click="menuOpen = false">Kontakt</a></li>
+    </ul>
+    <a class="mobile-menu-cta" href="tel:+492083700000" @click="menuOpen = false">
+      ☎ 0208 3700000 — Jetzt Buchen
+    </a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-particles">
+      <div v-for="p in particles" :key="p.id" class="particle"
+        :style="{ left: p.left, animationDuration: p.dur, animationDelay: p.delay, width: p.size, height: p.size }">
+      </div>
+    </div>
+    <div class="hero-content">
+      <div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Wasserstoff Motorreinigung · Dinslaken
+        </div>
+        <h1>
+          Professionelle<br/><span>Wasserstoff</span><br/>Motorreinigung
+        </h1>
+        <p class="hero-sub">
+          Verkokungen und Ölkohleablagerungen schonend entfernen — ohne Motoröffnung, ohne Chemie. Für Benzin- und Dieselfahrzeuge gleichermaßen geeignet.
+        </p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="tel:+492083700000">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+            0208 3700000
+          </a>
+          <a class="btn-secondary" href="#preise">
+            Preise ansehen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-logo-wrap">
+          <img class="hero-logo" src="img/logo.png" alt="Wasserstoff Motorreinigung Logo" />
+          <div class="hho-badge">
+            <span class="hho-badge-num">H₂</span>
+            <span class="hho-badge-sub">Carbon Clean</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-icon">🔧</div>
+        <div class="stat-text">
+          <span class="stat-num">Benzin &amp; Diesel</span>
+          <span class="stat-label">Alle Motortypen geeignet</span>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">💧</div>
+        <div class="stat-text">
+          <span class="stat-num">Nur Wasserdampf</span>
+          <span class="stat-label">Rückstandsfreies Abfallprodukt</span>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">🛡️</div>
+        <div class="stat-text">
+          <span class="stat-num">Ohne Öffnung</span>
+          <span class="stat-label">Kein Eingriff in den Motor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO SECTION -->
+  <section id="technologie" class="section info-section">
+    <div class="container">
+      <div class="info-grid">
+        <div>
+          <div class="section-tag">Das Problem</div>
+          <h2 class="section-title">Was sind <span>Verkokungen</span>?</h2>
+          <div class="divider"></div>
+          <p class="section-lead" style="margin-bottom: 1.5rem;">
+            Verkokungen entstehen durch Verbrennungsabläufe und Abgasrückführung — besonders bei häufigem Kurzstreckenbetrieb. Sie sind vergleichbar mit Kalk- und Fettablagerungen in Blutgefäßen: Sie verengen wichtige Wege im Motor und beeinträchtigen dessen Funktion zunehmend.
+          </p>
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-card-icon">📉</div>
+              <div class="info-card-body">
+                <h3>Steigender Kraftstoffverbrauch</h3>
+                <p>Ablagerungen an Einspritzdüsen und Ventilen verhindern eine optimale Kraftstoff-Luft-Gemischbildung. Der Motor verbraucht mehr, um die gleiche Leistung zu erzielen.</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">⚙️</div>
+              <div class="info-card-body">
+                <h3>Leistungs- und Drehmomentverlust</h3>
+                <p>Ölkohle in Kolbenringnuten und am Kolbenboden reduziert die Verdichtung. Der Motor läuft unruhiger und verliert spürbar an Dynamik.</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">⚠️</div>
+              <div class="info-card-body">
+                <h3>Folgeschäden vermeiden</h3>
+                <p>Unbehandelte Verkokungen können langfristig den Partikelfilter, den Katalysator und AGR-Ventile beschädigen. Regelmäßige Reinigung beugt kostspieligen Folgeschäden vor.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-tag">So funktioniert es</div>
+          <h2 class="section-title">Der <span>Reinigungsprozess</span></h2>
+          <div class="divider"></div>
+          <div class="process-steps">
+            <div class="process-step">
+              <div class="step-num">01</div>
+              <div class="step-body">
+                <h4>Anschluss — kein Motoreingriff</h4>
+                <p>Das Reinigungsgerät wird an den Luftansaugtrakt des laufenden Motors angeschlossen. Der Motor wird dabei nicht geöffnet.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="step-num">02</div>
+              <div class="step-body">
+                <h4>Chemische Reaktion im Motor</h4>
+                <p>Bei Betriebstemperatur reagiert der zugeführte Wasserstoff mit den Kohlenstoffablagerungen. Es entsteht Methangas, das die Ölkohle schonend abträgt.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="step-num">03</div>
+              <div class="step-body">
+                <h4>Rückstandsfreie Verbrennung</h4>
+                <p>Das entstandene Methangas wird im Motor verbrannt. Als einzige Abfallprodukte entstehen CO₂ und Wasserdampf — keine Rückstände im Motor.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="step-num">04</div>
+              <div class="step-body">
+                <h4>Ergebnis &amp; Abschlusscheck</h4>
+                <p>Ventile, Kolbenboden, Injektorspitzen, AGR-Ventilsitze und Partikelfilter sind gereinigt. Der Motor läuft ruhiger, verbraucht weniger und hat eine bessere Gasannahme.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="preise" class="section pricing-section">
+    <div class="container">
+      <div class="section-tag">Transparente Preise</div>
+      <h2 class="section-title">Unsere <span>Leistungspakete</span></h2>
+      <div class="divider"></div>
+      <p class="section-lead">Wählen Sie das passende Paket für Ihr Fahrzeug. Keine versteckten Kosten.</p>
+      <div class="pricing-grid" id="leistungen">
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-name">Standard</div>
+            <div class="pricing-price">
+              <span class="price-currency">€</span>
+              <span class="price-amount">150</span>
+            </div>
+            <div class="price-duration">ca. 1 Stunde · inkl. MwSt.</div>
+            <div class="pricing-desc" style="margin-top: 0.8rem;">
+              Ideal für Fahrzeuge mit regulärem Wartungsstand unter 100.000 km.
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="feature-check">✓</span> Wasserstoff-Motorreinigung</li>
+            <li><span class="feature-check">✓</span> Reinigung von Ventilen &amp; Kolbenboden</li>
+            <li><span class="feature-check">✓</span> Injektorspitzen &amp; AGR-Ventilsitze</li>
+            <li><span class="feature-check">✓</span> Geeignet für Benzin &amp; Diesel</li>
+            <li><span class="feature-check">✓</span> Sofort fahrbereit nach Behandlung</li>
+          </ul>
+          <a class="pricing-cta secondary" href="tel:+492083700000">Termin vereinbaren</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="recommended-badge">⭐ Empfohlen</div>
+          <div class="pricing-header">
+            <div class="pricing-name">Intensiv</div>
+            <div class="pricing-price">
+              <span class="price-currency">€</span>
+              <span class="price-amount">300</span>
+            </div>
+            <div class="price-duration">ca. 2 Stunden · inkl. MwSt.</div>
+            <div class="pricing-desc" style="margin-top: 0.8rem;">
+              Für Fahrzeuge <strong style="color: var(--neon)">ab 100.000 km</strong> — maximale Tiefenreinigung für stark verkokste Motoren.
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="feature-check">✓</span> Verlängerte Behandlungsdauer</li>
+            <li><span class="feature-check">✓</span> Tiefenreinigung Kolbenringe &amp; -boden</li>
+            <li><span class="feature-check">✓</span> Partikelfilter &amp; Katalysator-Unterstützung</li>
+            <li><span class="feature-check">✓</span> Turbogeometrie &amp; AGR-Ventilsitze</li>
+            <li><span class="feature-check">✓</span> Glüh- &amp; Zündkerzenbereich</li>
+            <li><span class="feature-check">✓</span> Empfohlen ab 100.000 km Laufleistung</li>
+          </ul>
+          <a class="pricing-cta primary" href="tel:+492083700000">
+            ☎ Jetzt Buchen — 0208 3700000
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section faq-section">
+    <div class="container">
+      <div class="section-tag">Häufige Fragen</div>
+      <h2 class="section-title">Fragen &amp; <span>Antworten</span></h2>
+      <div class="divider"></div>
+      <div class="faq-list">
+        <div class="faq-item" :class="{ open: faqOpen === 0 }">
+          <button class="faq-trigger" @click="faqOpen = faqOpen === 0 ? null : 0">
+            <span class="faq-trigger-text">Ist die Reinigung schädlich für den Motor?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-body" :style="faqOpen === 0 ? 'max-height: 300px' : ''">
+            <div class="faq-body-inner">Nein. Die Wasserstoffreinigung ist vollständig ungefährlich für Ihren Motor. Die gelösten Ablagerungen werden direkt im Motor verbrannt — es entstehen keine Rückstände.</div>
+          </div>
+        </div>
+        <div class="faq-item" :class="{ open: faqOpen === 1 }">
+          <button class="faq-trigger" @click="faqOpen = faqOpen === 1 ? null : 1">
+            <span class="faq-trigger-text">Ist das Verfahren umweltfreundlich?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-body" :style="faqOpen === 1 ? 'max-height: 300px' : ''">
+            <div class="faq-body-inner">Ja. Als einziges Abfallprodukt entsteht Wasserdampf. Es werden keine Chemikalien verwendet. Das Verfahren ist ungefährlich und umweltverträglich.</div>
+          </div>
+        </div>
+        <div class="faq-item" :class="{ open: faqOpen === 2 }">
+          <button class="faq-trigger" @click="faqOpen = faqOpen === 2 ? null : 2">
+            <span class="faq-trigger-text">Welche Motorteile werden gereinigt?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-body" :style="faqOpen === 2 ? 'max-height: 300px' : ''">
+            <div class="faq-body-inner">Ventile, Kolbenboden, Verdichtungsraum, Kolbenringnut, Turbogeometrie, Injektorspitzen, Glüh- und Zündkerzen, Partikelfilter, Katalysator sowie AGR-Ventilsitze.</div>
+          </div>
+        </div>
+        <div class="faq-item" :class="{ open: faqOpen === 3 }">
+          <button class="faq-trigger" @click="faqOpen = faqOpen === 3 ? null : 3">
+            <span class="faq-trigger-text">Wie oft sollte die Reinigung durchgeführt werden?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-body" :style="faqOpen === 3 ? 'max-height: 300px' : ''">
+            <div class="faq-body-inner">Eine regelmäßige Reinigung löst Ablagerungen, bevor sie langfristige Schäden verursachen. Besonders bei häufigem Kurzstreckenbetrieb ist eine regelmäßige Wartung empfehlenswert.</div>
+          </div>
+        </div>
+        <div class="faq-item" :class="{ open: faqOpen === 4 }">
+          <button class="faq-trigger" @click="faqOpen = faqOpen === 4 ? null : 4">
+            <span class="faq-trigger-text">Funktioniert es bei Benzin- und Dieselfahrzeugen?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-body" :style="faqOpen === 4 ? 'max-height: 300px' : ''">
+            <div class="faq-body-inner">Ja, das Verfahren ist für alle Motortypen geeignet — unabhängig davon, ob Sie ein Benzin- oder Dieselfahrzeug fahren.</div>
+          </div>
+        </div>
+        <div class="faq-item" :class="{ open: faqOpen === 5 }">
+          <button class="faq-trigger" @click="faqOpen = faqOpen === 5 ? null : 5">
+            <span class="faq-trigger-text">Muss der Motor geöffnet werden?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-body" :style="faqOpen === 5 ? 'max-height: 300px' : ''">
+            <div class="faq-body-inner">Nein. Das Gerät wird lediglich an den Luftansaugtrakt angeschlossen. Es ist kein Eingriff in den Motor erforderlich.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="kontakt" class="section contact-section">
+    <div class="container">
+      <div class="section-tag">Erreichbarkeit</div>
+      <h2 class="section-title">So finden Sie <span>uns</span></h2>
+      <div class="divider"></div>
+      <p class="section-lead">Wir freuen uns auf Ihre Anfrage. Rufen Sie einfach an oder besuchen Sie uns direkt.</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">📞</div>
+          <h3>Telefon</h3>
+          <div class="contact-value"><a href="tel:+492083700000">0208 3700000</a></div>
+          <div class="contact-sub">Rufen Sie uns direkt an, um Ihren Termin zu vereinbaren.</div>
+          <a href="tel:+492083700000" style="margin-top: 1.2rem; display: inline-flex; align-items: center; gap: 6px; background: var(--neon); color: var(--dark); padding: 10px 18px; border-radius: 6px; font-family: Rajdhani, sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.06em; text-decoration: none; text-transform: uppercase;">
+            Jetzt Anrufen
+          </a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <h3>Standort</h3>
+          <div class="contact-value">Dinslaken</div>
+          <div class="contact-sub">PLZ 46535 · Service-BB<br/>Gut erreichbar aus dem Großraum Berlin und Umgebung.</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">🕐</div>
+          <h3>Öffnungszeiten Reinigung</h3>
+          <div class="hours-list">
+            <div class="hour-row"><span class="hour-day">Dienstag</span><span class="hour-time">Nach Absprache</span></div>
+            <div class="hour-row"><span class="hour-day">Mittwoch</span><span class="hour-time">Nach Absprache</span></div>
+            <div class="hour-row"><span class="hour-day">Donnerstag</span><span class="hour-time">Nach Absprache</span></div>
+            <div class="hour-row"><span class="hour-day">Freitag</span><span class="hour-time">Nach Absprache</span></div>
+            <div class="hour-row" style="margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border)"><span class="hour-day">Mo / Sa / So</span><span class="hour-time" style="color: var(--text-dim)">Geschlossen</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a class="footer-logo" href="#">
+        <img src="img/logo.png" alt="Logo" />
+        <span>Wasserstoff Motorreinigung Matthes</span>
+      </a>
+      <div class="footer-text">
+        © 2025 Wasserstoff Motorreinigung Matthes · Dinslaken 46535 · <span>0208 3700000</span>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <a href="impressum.html">Impressum</a>
+      <span class="footer-legal-sep">·</span>
+      <a href="datenschutz.html">Datenschutzerklärung</a>
+      <span class="footer-legal-sep">·</span>
+      <button onclick="cookieBannerShow()">🍪 Cookie-Einstellungen</button>
+    </div>
+  </footer>
+
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-banner-inner">
+      <div class="cookie-banner-icon">🍪</div>
+      <div class="cookie-banner-text">
+        <strong>Diese Website verwendet Cookies</strong>
+        <p>Wir setzen technisch notwendige Cookies ein. Mit Klick auf „Alle akzeptieren" stimmen Sie ggf. weiteren Cookies zu. Mehr in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+      </div>
+      <div class="cookie-banner-actions">
+        <button class="cookie-btn-accept" onclick="cookieAccept()">Alle akzeptieren</button>
+        <button class="cookie-btn-necessary" onclick="cookieNecessary()">Nur notwendige</button>
+        <a class="cookie-btn-more" href="datenschutz.html">Mehr Infos</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING CTA (mobile) -->
+  <div class="float-cta">
+    <a href="tel:+492083700000">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+      Jetzt Anrufen
+    </a>
+  </div>
+</div>
+
+<script>
+// Cookie logic (vanilla, runs outside Vue)
+const COOKIE_KEY = 'wmm_cookie_consent';
+
+function cookieBannerShow() {
+  document.getElementById('cookie-banner').classList.add('visible');
+}
+
+function cookieAccept() {
+  localStorage.setItem(COOKIE_KEY, 'all');
+  document.getElementById('cookie-banner').classList.remove('visible');
+}
+
+function cookieNecessary() {
+  localStorage.setItem(COOKIE_KEY, 'necessary');
+  document.getElementById('cookie-banner').classList.remove('visible');
+}
+
+// Show banner if no consent saved yet
+window.addEventListener('DOMContentLoaded', () => {
+  if (!localStorage.getItem(COOKIE_KEY)) {
+    setTimeout(() => cookieBannerShow(), 800);
+  }
+});
+</script>
+
+<script>
+const { createApp, ref, onMounted, onUnmounted } = Vue;
+
+createApp({
+  setup() {
+    const menuOpen = ref(false);
+    const scrolled = ref(false);
+    const faqOpen = ref(null);
+
+    const particles = Array.from({ length: 18 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100 + '%',
+      dur: (8 + Math.random() * 12) + 's',
+      delay: (Math.random() * 10) + 's',
+      size: (2 + Math.random() * 3) + 'px',
+    }));
+
+    const handleScroll = () => {
+      scrolled.value = window.scrollY > 40;
+    };
+
+    onMounted(() => {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', handleScroll);
+    });
+
+    return { menuOpen, scrolled, particles, faqOpen };
+  }
+}).mount('#app');
+</script>
+</body>
+</html>
