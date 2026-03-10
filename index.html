@@ -3,10 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wasserstoff Motorreinigung Matthes | Dinslaken</title>
+  <title>OXYHTECH Wasserstoff-Motorreinigung in Dinslaken | Verkokungen schonend entfernen</title>
+  <meta name="description" content="OXYHTECH Wasserstoff-Motorreinigung in Dinslaken mit zertifiziertem Nova-Gerät. Verkokungen und Ölkohleablagerungen schonend entfernen – ohne Motoröffnung, ohne Chemie. Für Benzin- und Dieselfahrzeuge gleichermaßen geeignet.">
+  <link rel="canonical" href="http://wasserstoff-motorreinigung.com/">
+  <meta name="theme-color" content="#060a0f">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Wasserstoff Motorreinigung Matthes | Dinslaken">
+  <meta property="og:description" content="Wasserstoff-Motorreinigung in Dinslaken – weniger Verbrauch, mehr Leistung, Schutz vor teuren Motorschäden.">
+  <meta property="og:url" content="http://wasserstoff-motorreinigung.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "Wasserstoff Motorreinigung Matthes",
+    "description": "OXYHTECH Wasserstoff-Motorreinigung in Dinslaken mit zertifiziertem Nova-Gerät. Verkokungen und Ölkohleablagerungen schonend entfernen – ohne Motoröffnung, ohne Chemie.",
+    "url": "http://wasserstoff-motorreinigung.com/",
+    "telephone": "+49-208-3700000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dinslaken",
+      "postalCode": "46535",
+      "addressCountry": "DE"
+    },
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Dinslaken und Umgebung"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       --neon: #00e040;
@@ -131,6 +171,14 @@
     .info-card-icon { font-size: 1.6rem; flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,224,64,0.08); border-radius: 8px; }
     .info-card-body h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.4rem; }
     .info-card-body p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.6; }
+    .nova-image {
+      max-width: 420px;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(0,224,64,0.2);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+    }
     .process-steps { display: flex; flex-direction: column; gap: 0; }
     .process-step { display: flex; gap: 1.5rem; position: relative; }
     .process-step:not(:last-child)::before { content: ''; position: absolute; left: 19px; top: 44px; width: 2px; height: calc(100% - 10px); background: linear-gradient(to bottom, var(--neon-dim), transparent); }
@@ -162,7 +210,13 @@
     .pricing-cta.secondary { background: rgba(0,224,64,0.08); color: var(--neon); border: 1px solid rgba(0,224,64,0.3); }
     .pricing-cta.secondary:hover { background: rgba(0,224,64,0.15); border-color: rgba(0,224,64,0.5); transform: translateY(-2px); }
 
-    /* FAQ */
+    .testimonials-section { background: var(--dark); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+    .testimonial-card { background: var(--dark3); border-radius: 14px; border: 1px solid var(--border); padding: 1.6rem 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+    .testimonial-quote { margin-bottom: 0.9rem; line-height: 1.6; }
+    .testimonial-name { font-family: 'Rajdhani', sans-serif; font-weight: 600; color: #fff; font-size: 0.95rem; }
+    .testimonial-meta { font-size: 0.8rem; color: var(--text-dim); }
+
     .faq-section { background: var(--dark2); }
     .faq-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; max-width: 900px; }
     .faq-item { background: var(--dark3); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s; }
@@ -191,7 +245,6 @@
     .hour-day { color: var(--text-dim); }
     .hour-time { color: var(--text); font-weight: 500; }
 
-    /* FOOTER */
     .footer { background: var(--dark2); border-top: 1px solid var(--border); padding: 1.8rem 2rem 1.4rem; }
     .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
     .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -218,7 +271,6 @@
     .footer-legal a:hover, .footer-legal button:hover { color: var(--neon); }
     .footer-legal-sep { color: var(--border); }
 
-    /* COOKIE BANNER */
     .cookie-banner {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -287,6 +339,7 @@
       .info-grid { grid-template-columns: 1fr; gap: 3rem; }
       .pricing-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
       .float-cta { display: block; }
       .faq-trigger-text { font-size: 1.25rem; }
       .faq-body-inner { font-size: 1.05rem; }
@@ -304,8 +357,21 @@
       0%   { top: -2px; opacity: 0; }
       5%   { opacity: 0.4; }
       35%  { top: 100vh; opacity: 0; }
-      100% { top: 100vh; opacity: 0; } /* sits invisible for the rest */
+      100% { top: 100vh; opacity: 0; }
     }
+
+    .animate {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+    }
+    .animate.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .animate.delay-1 { transition-delay: 0.08s; }
+    .animate.delay-2 { transition-delay: 0.16s; }
+    .animate.delay-3 { transition-delay: 0.24s; }
   </style>
 </head>
 <body>
@@ -313,9 +379,9 @@
   <div class="scan-line"></div>
 
   <!-- NAVBAR -->
-  <nav class="navbar" :class="{ scrolled: scrolled }">
+  <nav class="navbar" :class="{ scrolled: scrolled }" aria-label="Hauptnavigation">
     <a class="nav-logo" href="#">
-      <img src="img/logo.png" alt="Logo" />
+      <img src="img/logo.png" alt="Logo" loading="lazy" />
       <div class="nav-logo-text">
         <span>Wasserstoff</span>
         <span>Motorreinigung Matthes</span>
@@ -329,7 +395,7 @@
       <li><a href="#kontakt">Kontakt</a></li>
       <li><a class="nav-cta" href="tel:+492083700000">☎ Jetzt Buchen</a></li>
     </ul>
-    <button class="burger" :class="{ open: menuOpen }" @click="menuOpen = !menuOpen">
+    <button class="burger" :class="{ open: menuOpen }" @click="menuOpen = !menuOpen" aria-label="Navigation ein- oder ausklappen">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -349,7 +415,7 @@
   </div>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero js-animate animate">
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
     <div class="hero-particles">
@@ -382,7 +448,7 @@
       </div>
       <div class="hero-visual">
         <div class="hero-logo-wrap">
-          <img class="hero-logo" src="img/logo.png" alt="Wasserstoff Motorreinigung Logo" />
+          <img class="hero-logo" src="img/logo.png" alt="Wasserstoff Motorreinigung Logo" loading="lazy" />
           <div class="hho-badge">
             <span class="hho-badge-num">H₂</span>
             <span class="hho-badge-sub">Carbon Clean</span>
@@ -394,7 +460,7 @@
 
   <!-- STATS BAR -->
   <div class="stats-bar">
-    <div class="stats-inner">
+    <div class="stats-inner js-animate animate">
       <div class="stat-item">
         <div class="stat-icon">🔧</div>
         <div class="stat-text">
@@ -419,16 +485,59 @@
     </div>
   </div>
 
-  <!-- INFO SECTION -->
-  <section id="technologie" class="section info-section">
+  <!-- NOVA DEVICE SECTION -->
+  <section class="section info-section js-animate animate" aria-labelledby="nova-heading">
     <div class="container">
       <div class="info-grid">
         <div>
-          <div class="section-tag">Das Problem</div>
-          <h2 class="section-title">Was sind <span>Verkokungen</span>?</h2>
+          <div class="section-tag">OXYHTECH Nova Gerät</div>
+          <h2 id="nova-heading" class="section-title">Das <span>Nova</span> Motorreinigungsgerät</h2>
           <div class="divider"></div>
           <p class="section-lead" style="margin-bottom: 1.5rem;">
-            Verkokungen entstehen durch Verbrennungsabläufe und Abgasrückführung — besonders bei häufigem Kurzstreckenbetrieb. Sie sind vergleichbar mit Kalk- und Fettablagerungen in Blutgefäßen: Sie verengen wichtige Wege im Motor und beeinträchtigen dessen Funktion zunehmend.
+            Wir arbeiten ausschließlich mit dem zertifizierten OXYHTECH Nova-Gerät für die Wasserstoff-Motorreinigung.
+            So stellen wir sicher, dass jede Reinigung nach Herstellervorgaben und mit konstanter, kontrollierter Leistung durchgeführt wird.
+          </p>
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-card-icon">⚡</div>
+              <div class="info-card-body">
+                <h3>Hohe Gasleistung</h3>
+                <p>Das Nova-Gerät liefert dauerhaft HHO-Gas in hoher Menge, um auch stark verkokte Motoren effektiv zu reinigen.</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">🛡️</div>
+              <div class="info-card-body">
+                <h3>Zertifizierte Technik</h3>
+                <p>OXYHTECH ist international anerkannt und ISO-zertifiziert. Wir halten uns streng an die vorgegebenen Abläufe.</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">♻️</div>
+              <div class="info-card-body">
+                <h3>Schonend &amp; nachhaltig</h3>
+                <p>Keine zusätzlichen Chemikalien, kein Öffnen des Motors – die Reinigung erfolgt im laufenden Betrieb, rückstandsfrei.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual" style="justify-content:flex-end;">
+          <img class="nova-image" src="img/nova.png" alt="OXYHTECH Nova Motorreinigungsgerät" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO SECTION -->
+  <section id="technologie" class="section info-section">
+    <div class="container js-animate animate">
+      <div class="info-grid">
+        <div>
+          <div class="section-tag">Das Problem</div>
+          <h2 class="section-title">Was sind <span>Verkokungen</span> und warum OXYHTECH?</h2>
+          <div class="divider"></div>
+          <p class="section-lead" style="margin-bottom: 1.5rem;">
+            Verkokungen entstehen durch Verbrennungsabläufe und Abgasrückführung — besonders bei häufigem Kurzstreckenbetrieb. Sie sind vergleichbar mit Kalk- und Fettablagerungen in Blutgefäßen: Sie verengen wichtige Wege im Motor und beeinträchtigen dessen Funktion zunehmend. Mit der OXYHTECH Wasserstoff-Motorreinigung lösen wir diese Ablagerungen im laufenden Betrieb schonend und ohne Motordemontage.
           </p>
           <div class="info-cards">
             <div class="info-card">
@@ -456,35 +565,35 @@
         </div>
         <div>
           <div class="section-tag">So funktioniert es</div>
-          <h2 class="section-title">Der <span>Reinigungsprozess</span></h2>
+          <h2 class="section-title">Der <span>OXYHTECH Reinigungsprozess</span></h2>
           <div class="divider"></div>
           <div class="process-steps">
             <div class="process-step">
               <div class="step-num">01</div>
               <div class="step-body">
                 <h4>Anschluss — kein Motoreingriff</h4>
-                <p>Das Reinigungsgerät wird an den Luftansaugtrakt des laufenden Motors angeschlossen. Der Motor wird dabei nicht geöffnet.</p>
+                <p>Das OXYHTECH Nova-Gerät wird an den Luftansaugtrakt des laufenden Motors angeschlossen. Der Motor wird dabei nicht geöffnet.</p>
               </div>
             </div>
             <div class="process-step">
               <div class="step-num">02</div>
               <div class="step-body">
                 <h4>Chemische Reaktion im Motor</h4>
-                <p>Bei Betriebstemperatur reagiert der zugeführte Wasserstoff mit den Kohlenstoffablagerungen. Es entsteht Methangas, das die Ölkohle schonend abträgt.</p>
+                <p>Bei Betriebstemperatur reagiert der zugeführte Wasserstoff (HHO-Gas) mit den Kohlenstoffablagerungen. Es entsteht ein Gasgemisch, das die Ölkohle schonend von Ventilen, Kolben und Brennraum löst.</p>
               </div>
             </div>
             <div class="process-step">
               <div class="step-num">03</div>
               <div class="step-body">
                 <h4>Rückstandsfreie Verbrennung</h4>
-                <p>Das entstandene Methangas wird im Motor verbrannt. Als einzige Abfallprodukte entstehen CO₂ und Wasserdampf — keine Rückstände im Motor.</p>
+                <p>Das Gasgemisch wird im Motor vollständig verbrannt. Als Abfallprodukte entstehen hauptsächlich CO₂ und Wasserdampf — es bleiben keine festen Rückstände im Motor zurück.</p>
               </div>
             </div>
             <div class="process-step">
               <div class="step-num">04</div>
               <div class="step-body">
                 <h4>Ergebnis &amp; Abschlusscheck</h4>
-                <p>Ventile, Kolbenboden, Injektorspitzen, AGR-Ventilsitze und Partikelfilter sind gereinigt. Der Motor läuft ruhiger, verbraucht weniger und hat eine bessere Gasannahme.</p>
+                <p>Ventile, Kolbenboden, Injektorspitzen, AGR-Ventilsitze und Partikelfilter werden von Verkokungen befreit. Der Motor läuft ruhiger, verbraucht weniger und reagiert besser auf Gasbefehle. Abschließend prüfen wir das Laufverhalten gemeinsam mit Ihnen.</p>
               </div>
             </div>
           </div>
@@ -495,11 +604,11 @@
 
   <!-- PRICING -->
   <section id="preise" class="section pricing-section">
-    <div class="container">
+    <div class="container js-animate animate">
       <div class="section-tag">Transparente Preise</div>
       <h2 class="section-title">Unsere <span>Leistungspakete</span></h2>
       <div class="divider"></div>
-      <p class="section-lead">Wählen Sie das passende Paket für Ihr Fahrzeug. Keine versteckten Kosten.</p>
+      <p class="section-lead">Wählen Sie das passende OXYHTECH-Reinigungspaket für Ihr Fahrzeug. Keine versteckten Kosten – wir arbeiten ausschließlich mit zertifizierten OXYHTECH Geräten.</p>
       <div class="pricing-grid" id="leistungen">
         <div class="pricing-card">
           <div class="pricing-header">
@@ -510,7 +619,7 @@
             </div>
             <div class="price-duration">ca. 1 Stunde · inkl. MwSt.</div>
             <div class="pricing-desc" style="margin-top: 0.8rem;">
-              Ideal für Fahrzeuge mit regulärem Wartungsstand unter 100.000 km.
+              Ideal für Fahrzeuge mit regulärem Wartungsstand unter 100.000 km. Für alle, die ihrem Motor mit einer OXYHTECH Wasserstoff-Motorreinigung wieder freien Atem verschaffen wollen.
             </div>
           </div>
           <ul class="pricing-features">
@@ -532,7 +641,7 @@
             </div>
             <div class="price-duration">ca. 2 Stunden · inkl. MwSt.</div>
             <div class="pricing-desc" style="margin-top: 0.8rem;">
-              Für Fahrzeuge <strong style="color: var(--neon)">ab 100.000 km</strong> — maximale Tiefenreinigung für stark verkokste Motoren.
+              Für Fahrzeuge <strong style="color: var(--neon)">ab 100.000 km</strong> — maximale Tiefenreinigung mit OXYHTECH Nova für stark verkokte Motoren oder intensive Kurzstrecken-Nutzung.
             </div>
           </div>
           <ul class="pricing-features">
@@ -551,20 +660,57 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS & OXYHTECH PARTNER -->
+  <section class="section testimonials-section" aria-labelledby="stimmen-heading">
+    <div class="container js-animate animate">
+      <div class="section-tag">Erfahrungen &amp; Partner</div>
+      <h2 id="stimmen-heading" class="section-title">Stimmen unserer <span>Kunden</span> &amp; OXYHTECH Partnerschaft</h2>
+      <div class="divider"></div>
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <p class="testimonial-quote">„Nach der OXYHTECH Reinigung läuft mein Diesel wieder deutlich ruhiger und verbraucht spürbar weniger. Hätte ich viel früher machen sollen.“</p>
+          <div class="testimonial-name">Kunde aus Dinslaken</div>
+          <div class="testimonial-meta">VW Touran · &gt;120.000 km</div>
+        </article>
+        <article class="testimonial-card">
+          <p class="testimonial-quote">„Top Service, alles wurde verständlich erklärt. Die Leistung ist wieder da und der Wagen rußt kaum noch.“</p>
+          <div class="testimonial-name">Kundin aus Oberhausen</div>
+          <div class="testimonial-meta">BMW 3er Diesel · Kurzstreckenfahrer</div>
+        </article>
+        <article class="testimonial-card">
+          <p class="testimonial-quote">„Schnelle Terminvergabe, professionelle Durchführung mit dem OXYHTECH Nova-Gerät. Ideal, um teuren Motorschäden vorzubeugen.“</p>
+          <div class="testimonial-name">Kunde aus Voerde</div>
+          <div class="testimonial-meta">Audi A4 · 180.000 km</div>
+        </article>
+      </div>
+      <div class="testimonials-grid" style="margin-top:2.5rem; align-items:center;">
+        <article class="testimonial-card" style="grid-column: span 3; display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+          <img src="img/oxytech.png" alt="OXYHTECH Logo" loading="lazy" style="max-width:180px; height:auto;">
+          <div>
+            <div class="testimonial-name">Offizieller Partner von OXYHTECH</div>
+            <p class="testimonial-quote" style="margin-top:0.4rem;">
+              Wir arbeiten ausschließlich mit zertifizierter OXYHTECH Technologie und dem Nova-Gerät für die Wasserstoff-Motorreinigung. So stellen wir sicher, dass jede Reinigung nach Herstellervorgaben durchgeführt wird.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section id="faq" class="section faq-section">
-    <div class="container">
+    <div class="container js-animate animate">
       <div class="section-tag">Häufige Fragen</div>
-      <h2 class="section-title">Fragen &amp; <span>Antworten</span></h2>
+      <h2 class="section-title">Fragen zur <span>OXYHTECH Reinigung</span></h2>
       <div class="divider"></div>
       <div class="faq-list">
         <div class="faq-item" :class="{ open: faqOpen === 0 }">
           <button class="faq-trigger" @click="faqOpen = faqOpen === 0 ? null : 0">
-            <span class="faq-trigger-text">Ist die Reinigung schädlich für den Motor?</span>
+            <span class="faq-trigger-text">Ist die OXYHTECH Reinigung schädlich für den Motor?</span>
             <span class="faq-chevron">▼</span>
           </button>
           <div class="faq-body" :style="faqOpen === 0 ? 'max-height: 300px' : ''">
-            <div class="faq-body-inner">Nein. Die Wasserstoffreinigung ist vollständig ungefährlich für Ihren Motor. Die gelösten Ablagerungen werden direkt im Motor verbrannt — es entstehen keine Rückstände.</div>
+            <div class="faq-body-inner">Nein. Die OXYHTECH Wasserstoff-Motorreinigung arbeitet ohne aggressive Chemie und ohne Motordemontage. Die gelösten Ablagerungen werden im laufenden Betrieb kontrolliert verbrannt – es bleiben keine festen Rückstände im Motor.</div>
           </div>
         </div>
         <div class="faq-item" :class="{ open: faqOpen === 1 }">
@@ -573,43 +719,43 @@
             <span class="faq-chevron">▼</span>
           </button>
           <div class="faq-body" :style="faqOpen === 1 ? 'max-height: 300px' : ''">
-            <div class="faq-body-inner">Ja. Als einziges Abfallprodukt entsteht Wasserdampf. Es werden keine Chemikalien verwendet. Das Verfahren ist ungefährlich und umweltverträglich.</div>
+            <div class="faq-body-inner">Ja. Es werden keine zusätzlichen Chemikalien in den Motor eingebracht. Die Hauptabfallprodukte sind CO₂ und Wasserdampf. Durch die Reinigung kann der Verbrauch sinken und der Motor effizienter arbeiten.</div>
           </div>
         </div>
         <div class="faq-item" :class="{ open: faqOpen === 2 }">
           <button class="faq-trigger" @click="faqOpen = faqOpen === 2 ? null : 2">
-            <span class="faq-trigger-text">Welche Motorteile werden gereinigt?</span>
+            <span class="faq-trigger-text">Welche Motorteile werden mit dem OXYHTECH Nova Gerät gereinigt?</span>
             <span class="faq-chevron">▼</span>
           </button>
           <div class="faq-body" :style="faqOpen === 2 ? 'max-height: 300px' : ''">
-            <div class="faq-body-inner">Ventile, Kolbenboden, Verdichtungsraum, Kolbenringnut, Turbogeometrie, Injektorspitzen, Glüh- und Zündkerzen, Partikelfilter, Katalysator sowie AGR-Ventilsitze.</div>
+            <div class="faq-body-inner">Vor allem Ventile, Kolbenboden, Verdichtungsraum, Kolbenringnut, Turbogeometrie, Injektorspitzen, Glüh- und Zündkerzenbereiche sowie Abgaswege wie AGR-Ventile und Partikelfilter profitieren von der Entkokung.</div>
           </div>
         </div>
         <div class="faq-item" :class="{ open: faqOpen === 3 }">
           <button class="faq-trigger" @click="faqOpen = faqOpen === 3 ? null : 3">
-            <span class="faq-trigger-text">Wie oft sollte die Reinigung durchgeführt werden?</span>
+            <span class="faq-trigger-text">Wie oft sollte die OXYHTECH Reinigung durchgeführt werden?</span>
             <span class="faq-chevron">▼</span>
           </button>
           <div class="faq-body" :style="faqOpen === 3 ? 'max-height: 300px' : ''">
-            <div class="faq-body-inner">Eine regelmäßige Reinigung löst Ablagerungen, bevor sie langfristige Schäden verursachen. Besonders bei häufigem Kurzstreckenbetrieb ist eine regelmäßige Wartung empfehlenswert.</div>
+            <div class="faq-body-inner">Je nach Fahrprofil empfehlen wir eine OXYHTECH Wasserstoff-Motorreinigung etwa alle 40.000–60.000 km. Bei viel Kurzstrecke oder überwiegendem Stadtverkehr kann ein kürzeres Intervall sinnvoll sein.</div>
           </div>
         </div>
         <div class="faq-item" :class="{ open: faqOpen === 4 }">
           <button class="faq-trigger" @click="faqOpen = faqOpen === 4 ? null : 4">
-            <span class="faq-trigger-text">Funktioniert es bei Benzin- und Dieselfahrzeugen?</span>
+            <span class="faq-trigger-text">Funktioniert die OXYHTECH Reinigung bei Benzin- und Dieselfahrzeugen?</span>
             <span class="faq-chevron">▼</span>
           </button>
           <div class="faq-body" :style="faqOpen === 4 ? 'max-height: 300px' : ''">
-            <div class="faq-body-inner">Ja, das Verfahren ist für alle Motortypen geeignet — unabhängig davon, ob Sie ein Benzin- oder Dieselfahrzeug fahren.</div>
+            <div class="faq-body-inner">Ja, das OXYHTECH Nova-Gerät ist für nahezu alle gängigen Benzin- und Dieselmotoren geeignet – vom Kleinwagen bis zum größeren Transporter.</div>
           </div>
         </div>
         <div class="faq-item" :class="{ open: faqOpen === 5 }">
           <button class="faq-trigger" @click="faqOpen = faqOpen === 5 ? null : 5">
-            <span class="faq-trigger-text">Muss der Motor geöffnet werden?</span>
+            <span class="faq-trigger-text">Muss der Motor geöffnet oder zerlegt werden?</span>
             <span class="faq-chevron">▼</span>
           </button>
           <div class="faq-body" :style="faqOpen === 5 ? 'max-height: 300px' : ''">
-            <div class="faq-body-inner">Nein. Das Gerät wird lediglich an den Luftansaugtrakt angeschlossen. Es ist kein Eingriff in den Motor erforderlich.</div>
+            <div class="faq-body-inner">Nein. Das OXYHTECH Nova-Gerät wird lediglich an den Luftansaugtrakt angeschlossen. Es sind keine aufwendigen Demontagearbeiten nötig, die Reinigung erfolgt im geschlossenen System.</div>
           </div>
         </div>
       </div>
@@ -617,10 +763,10 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="kontakt" class="section contact-section">
-    <div class="container">
+  <section id="kontakt" class="section contact-section" aria-labelledby="kontakt-heading">
+    <div class="container js-animate animate">
       <div class="section-tag">Erreichbarkeit</div>
-      <h2 class="section-title">So finden Sie <span>uns</span></h2>
+      <h2 id="kontakt-heading" class="section-title">So finden Sie <span>uns</span></h2>
       <div class="divider"></div>
       <p class="section-lead">Wir freuen uns auf Ihre Anfrage. Rufen Sie einfach an oder besuchen Sie uns direkt.</p>
       <div class="contact-grid">
@@ -658,7 +804,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <a class="footer-logo" href="#">
-        <img src="img/logo.png" alt="Logo" />
+        <img src="img/logo.png" alt="Logo" loading="lazy" />
         <span>Wasserstoff Motorreinigung Matthes</span>
       </a>
       <div class="footer-text">
@@ -675,11 +821,11 @@
   </footer>
 
   <!-- COOKIE BANNER -->
-  <div id="cookie-banner" class="cookie-banner">
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-heading">
     <div class="cookie-banner-inner">
       <div class="cookie-banner-icon">🍪</div>
       <div class="cookie-banner-text">
-        <strong>Diese Website verwendet Cookies</strong>
+        <strong id="cookie-heading">Diese Website verwendet Cookies</strong>
         <p>Wir setzen technisch notwendige Cookies ein. Mit Klick auf „Alle akzeptieren" stimmen Sie ggf. weiteren Cookies zu. Mehr in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
       </div>
       <div class="cookie-banner-actions">
@@ -748,6 +894,20 @@ createApp({
 
     onMounted(() => {
       window.addEventListener('scroll', handleScroll, { passive: true });
+
+      const animated = document.querySelectorAll('.js-animate');
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      animated.forEach(el => observer.observe(el));
     });
 
     onUnmounted(() => {
